@@ -1,0 +1,12 @@
+#!/bin/bash
+pyfile="$PYFILE"
+pyfilec="${PYFILE%.*}.pyc"
+echo "Compiling $pyfile ..."
+python3 -m py_compile "$pyfile"
+if [[ -f "__pycache__/$pyfilec" ]]; then
+    mv "__pycache__/$pyfilec" .
+    rm -rf "__pycache__"
+else
+    echo "Error: Compilation failed."
+    exit 1
+fi
